@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UstaGo — A professional nearby, ready in 15 minutes</title>
+<style>
+  :root{
+    --navy:#1b2a4a;
+    --navy-soft:#3a4a6b;
+    --orange:#e36b2c;
+    --orange-dark:#c85a20;
+    --bg:#f7f6f3;
+    --line:#e3e1db;
+    --gray:#5b5f6a;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--navy);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+
+  header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 32px;
+    max-width:1120px;margin:0 auto;
+  }
+  .logo{font-size:22px;font-weight:800;letter-spacing:-0.01em;}
+  .logo span{color:var(--orange);}
+  nav{display:flex;align-items:center;gap:22px;font-size:15px;}
+  nav a.pro-link{color:var(--navy);text-decoration:none;font-weight:500;}
+  .btn{
+    display:inline-block;border-radius:8px;font-weight:600;font-size:15px;
+    padding:11px 20px;text-decoration:none;border:1px solid transparent;cursor:pointer;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-orange{background:var(--orange);color:#fff;}
+  .btn-orange:hover{background:var(--orange-dark);}
+  .btn-outline{background:#fff;border-color:var(--line);color:var(--navy);}
+  .btn-outline:hover{border-color:var(--navy-soft);}
+  .btn-navy{background:var(--navy);color:#fff;}
+  .btn-navy:hover{background:#101c34;}
+
+  .hero{
+    position:relative;
+    padding:64px 32px 80px;
+    max-width:1120px;margin:0 auto;
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center;
+  }
+  .hero h1{
+    font-size:52px;line-height:1.08;margin:0 0 20px;letter-spacing:-0.015em;font-weight:800;
+  }
+  .hero p{
+    font-size:18px;line-height:1.55;color:var(--gray);max-width:520px;margin:0 0 30px;
+  }
+  .hero .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+  .hero .note{font-size:14px;color:var(--gray);}
+
+  .pin-wrap{display:flex;align-items:center;justify-content:center;}
+  .pin-ring{
+    width:340px;height:340px;border-radius:50%;
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;position:relative;
+  }
+  .pin-ring::before{
+    content:"";position:absolute;width:220px;height:220px;border-radius:50%;border:1px solid var(--line);
+  }
+  .pin{
+    width:34px;height:46px;position:relative;z-index:2;
+  }
+  .pin svg{width:100%;height:100%;display:block;}
+
+  section{padding:56px 32px;}
+  .section-inner{max-width:1120px;margin:0 auto;}
+  h2{font-size:28px;font-weight:800;letter-spacing:-0.01em;margin:0 0 24px;}
+  .rule{border:none;border-top:1px solid var(--line);margin:0 0 28px;}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+  .step .num{color:var(--orange);font-weight:800;font-size:20px;margin-bottom:6px;}
+  .step h3{margin:0 0 8px;font-size:18px;font-weight:700;}
+  .step p{margin:0;color:var(--gray);font-size:15px;line-height:1.5;}
+
+  .benefits{
+    display:grid;grid-template-columns:1fr 1fr;
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;
+  }
+  .benefit{padding:26px 28px;border-bottom:1px solid var(--line);}
+  .benefit:nth-child(2){border-left:1px solid var(--line);}
+  .benefit:nth-child(3){border-bottom:none;}
+  .benefit:nth-child(4){border-bottom:none;border-left:1px solid var(--line);}
+  .benefit .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#3a9d5c;margin-right:9px;}
+  .benefit h3{display:inline;font-size:16px;font-weight:700;}
+  .benefit p{margin:8px 0 0;color:var(--gray);font-size:15px;line-height:1.5;}
+
+  .pro-banner{
+    margin-top:28px;border:1px solid var(--line);border-radius:12px;background:#fff;
+    padding:30px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  }
+  .pro-banner h3{margin:0 0 10px;font-size:20px;font-weight:800;}
+  .pro-banner p{margin:0;color:var(--gray);font-size:15px;line-height:1.55;max-width:560px;}
+
+  .request{background:#fff;border-top:1px solid var(--line);}
+  .request h2{margin-bottom:8px;}
+  .request > .section-inner > p{color:var(--gray);margin:0 0 22px;font-size:15px;}
+  .role-toggle{
+    display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;margin-bottom:18px;
+  }
+  .role-toggle button{
+    border:none;background:#fff;padding:11px 20px;font-size:14px;font-weight:600;cursor:pointer;color:var(--navy);
+  }
+  .role-toggle button.active{background:var(--navy);color:#fff;}
+  .request-form{display:flex;gap:12px;flex-wrap:wrap;max-width:520px;}
+  .request-form input[type=email]{
+    flex:1;min-width:220px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-size:15px;
+    font-family:inherit;
+  }
+  .request-form input[type=email]:focus{outline:2px solid var(--orange);outline-offset:1px;}
+  .confirm{
+    margin-top:16px;padding:12px 16px;background:#eef7f0;border:1px solid #bfe3c8;color:#1f6b3a;
+    border-radius:8px;font-size:14px;display:none;max-width:520px;
+  }
+  .confirm.show{display:block;}
+
+  footer{padding:28px 32px;color:var(--gray);font-size:13px;text-align:center;}
+
+  @media (max-width:860px){
+    .hero{grid-template-columns:1fr;padding-top:40px;}
+    .hero h1{font-size:36px;}
+    .pin-wrap{order:-1;}
+    .pin-ring{width:200px;height:200px;}
+    .pin-ring::before{width:130px;height:130px;}
+    .steps{grid-template-columns:1fr;}
+    .benefits{grid-template-columns:1fr;}
+    .benefit:nth-child(2),.benefit:nth-child(4){border-left:none;}
+    header{flex-wrap:wrap;gap:12px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Usta<span>Go</span></div>
+  <nav>
+    <a class="pro-link" href="#pro">I'm a professional</a>
+    <a class="btn btn-orange" href="#request">Submit a request</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div>
+    <h1>A professional nearby.<br>Ready in 15 minutes.</h1>
+    <p>Plumber, electrician, locksmith or carpenter — found by geolocation, with rating and price shown upfront. No calling around friends or scrolling random classifieds.</p>
+    <div class="cta-row">
+      <a class="btn btn-orange" href="#request">Find a professional</a>
+      <a class="btn btn-outline" href="#pro">I'm a professional, send me jobs</a>
+    </div>
+    <div class="note">Launching in Kazakhstan. Payment via Kaspi.</div>
+  </div>
+  <div class="pin-wrap">
+    <div class="pin-ring">
+      <div class="pin">
+        <svg viewBox="0 0 24 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 1C6.5 1 2 5.5 2 11c0 7.5 10 19.5 10 19.5S22 18.5 22 11c0-5.5-4.5-10-10-10z" stroke="#e36b2c" stroke-width="1.8"/>
+          <circle cx="12" cy="11" r="4.3" stroke="#e36b2c" stroke-width="1.8"/>
+          <path d="M12 8.8v4.4M9.8 11h4.4" stroke="#e36b2c" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="how">
+  <div class="section-inner">
+    <h2>How it works</h2>
+    <hr class="rule">
+    <div class="steps">
+      <div class="step">
+        <div class="num">01</div>
+        <h3>Describe the job</h3>
+        <p>Pick a specialty — plumber, electrician, locksmith, carpenter — and describe the job in a couple of words.</p>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <h3>Compare professionals</h3>
+        <p>See a list of nearby available professionals with ratings, reviews and the call-out price.</p>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <h3>The professional arrives</h3>
+        <p>Book a time, the professional shows up, and payment happens right in the app.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="section-inner">
+    <h2>Why UstaGo</h2>
+    <hr class="rule">
+    <div class="benefits">
+      <div class="benefit"><span class="dot"></span><h3>Ratings and reviews</h3><p>See who does good work before you even place an order.</p></div>
+      <div class="benefit"><span class="dot"></span><h3>Price upfront</h3><p>The call-out cost is known before you confirm the order.</p></div>
+      <div class="benefit"><span class="dot"></span><h3>Verified professionals</h3><p>Documents and experience are checked at registration.</p></div>
+      <div class="benefit"><span class="dot"></span><h3>In-app payment</h3><p>Kaspi Pay — no cash, no extra back-and-forth.</p></div>
+    </div>
+
+    <div class="pro-banner" id="pro">
+      <div>
+        <h3>Are you a professional? Get jobs near home</h3>
+        <p>No business cards, no ads on OLX. Requests from people nearby come to you automatically, payment goes straight to your card, and commission is charged only on completed jobs.</p>
+      </div>
+      <a class="btn btn-orange" href="#request">Become a professional</a>
+    </div>
+  </div>
+</section>
+
+<section class="request" id="request">
+  <div class="section-inner">
+    <h2>Submit a request</h2>
+    <p>We'll be launching the app in your city — you'll be the first to know.</p>
+
+    <div class="role-toggle">
+      <button type="button" class="active" data-role="customer">I'm a customer</button>
+      <button type="button" data-role="professional">I'm a professional</button>
+    </div>
+
+    <form class="request-form" id="requestForm">
+      <input type="email" id="emailInput" placeholder="Your email" required>
+      <button type="submit" class="btn btn-orange">Submit request</button>
+    </form>
+    <div class="confirm" id="confirmMsg"></div>
+  </div>
+</section>
+
+<footer>UstaGo — Landing Page (EN). Static prototype for hypothesis validation — no data is stored on a server.</footer>
+
+<script>
+  var role = "customer";
+  var toggleButtons = document.querySelectorAll(".role-toggle button");
+  toggleButtons.forEach(function(btn){
+    btn.addEventListener("click", function(){
+      toggleButtons.forEach(function(b){ b.classList.remove("active"); });
+      btn.classList.add("active");
+      role = btn.getAttribute("data-role");
+    });
+  });
+
+  document.getElementById("requestForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var email = document.getElementById("emailInput").value.trim();
+    var msg = document.getElementById("confirmMsg");
+    var roleLabel = role === "customer" ? "customer" : "professional";
+    msg.textContent = "Thanks! We've added " + email + " to the list as a " + roleLabel + ". We'll let you know when UstaGo launches in your city.";
+    msg.classList.add("show");
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
